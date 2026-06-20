@@ -1,0 +1,16 @@
+{
+  "sprint_goal": "Los pacientes reservan cita online 24/7 y la médico controla su agenda desde el celular, eliminando la dependencia del teléfono para ambas partes.",
+  "capacity": 20,
+  "committed": 19,
+  "stories": ["US-01", "US-02", "US-04", "US-05"],
+  "deferred": [
+    {
+      "id": "US-03",
+      "reason": "Supuesto activo no resuelto: costo de API WhatsApp Business pendiente de confirmación del dueño de la clínica. Adicionalmente, incluirla elevaría el comprometido a 27 pts, superando la capacidad en 7 pts. Se devuelve a refinamiento hasta Sprint 2."
+    },
+    {
+      "id": "US-06",
+      "reason": "Segunda fase — fuera del MVP. Decisión explícita del Product Owner (épica E-04 marcada como mvp:fuera-de-alcance)."
+    }
+  ]
+}

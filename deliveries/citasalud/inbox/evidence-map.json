@@ -1,0 +1,81 @@
+{
+  "discovery": "citasalud",
+  "generated": "2026-06-18",
+  "personas": [
+    {
+      "name": "M. (recepcionista)",
+      "role": "recepcionista",
+      "primary": true,
+      "backing": "primera mano",
+      "source": "recepcionista.md"
+    },
+    {
+      "name": "Dra. S. (médico)",
+      "role": "medico",
+      "primary": true,
+      "backing": "primera mano",
+      "source": "doctora.md"
+    },
+    {
+      "name": "J. (paciente)",
+      "role": "paciente",
+      "primary": true,
+      "backing": "primera mano",
+      "source": "paciente.md"
+    },
+    {
+      "name": "Dueño de la clínica",
+      "role": "dueno",
+      "primary": false,
+      "backing": "referenciada",
+      "source": "recepcionista.md"
+    }
+  ],
+  "pains": [
+    {
+      "id": "dobles-reservas",
+      "source": "recepcionista.md",
+      "persona": "M. (recepcionista)"
+    },
+    {
+      "id": "llamadas-de-consulta",
+      "source": "recepcionista.md",
+      "persona": "M. (recepcionista)"
+    },
+    {
+      "id": "recordatorios-manuales",
+      "source": "recepcionista.md",
+      "persona": "M. (recepcionista)"
+    },
+    {
+      "id": "no-shows-sin-aviso",
+      "source": "doctora.md",
+      "persona": "Dra. S. (médico)"
+    },
+    {
+      "id": "agenda-inaccesible-remotamente",
+      "source": "doctora.md",
+      "persona": "Dra. S. (médico)"
+    },
+    {
+      "id": "falta-info-paciente-nuevo",
+      "source": "doctora.md",
+      "persona": "Dra. S. (médico)"
+    },
+    {
+      "id": "cita-telefonica-horario-limitado",
+      "source": "paciente.md",
+      "persona": "J. (paciente)"
+    },
+    {
+      "id": "cita-perdida",
+      "source": "paciente.md",
+      "persona": "J. (paciente)"
+    },
+    {
+      "id": "recordatorio-inconsistente",
+      "source": "paciente.md",
+      "persona": "J. (paciente)"
+    }
+  ]
+}

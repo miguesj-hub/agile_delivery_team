@@ -1,0 +1,145 @@
+{
+  "project": "citasalud",
+  "generated": "2026-06-20",
+  "metric_of_success": "Tasa de inasistencia sin aviso previo <= 8 % al tercer mes de operacion (desde ~15 % actual)",
+  "epics": [
+    {
+      "id": "E-01",
+      "title": "Agendamiento en linea sin barreras telefonicas",
+      "value": "Pacientes reservan cita 24/7 sin llamar. Dobles reservas = 0. Recepcionista deja de recibir llamadas de consulta de disponibilidad.",
+      "priority": 1,
+      "rationale": "Cuello de botella principal del MVP; prerequisito tecnico de todas las demas epicas. Ataca el dolor mas frecuente de dos personas primarias (J. paciente, M. recepcionista).",
+      "personas": ["J. (paciente)", "M. (recepcionista)"],
+      "pains_addressed": ["cita-telefonica-horario-limitado", "cita-perdida", "dobles-reservas", "llamadas-de-consulta"],
+      "origin": ["mvp:F1", "mvp:F2", "us:US-01", "us:US-02", "req:R-01", "req:R-02", "req:R-06", "evidence:recepcionista.md", "evidence:paciente.md"]
+    },
+    {
+      "id": "E-02",
+      "title": "Recordatorios automaticos para reducir no-shows",
+      "value": "Tasa de inasistencia baja de ~15 % hacia la meta de 8 %. Recepcionista recupera ~1,5 h/dia de recordatorios manuales. Franjas canceladas con aviso quedan disponibles.",
+      "priority": 2,
+      "rationale": "Impacta directamente la metrica de exito del MVP. Transversal: beneficia a las tres personas primarias. Depende de E-01.",
+      "personas": ["J. (paciente)", "M. (recepcionista)", "Dra. S. (medico)"],
+      "pains_addressed": ["no-shows-sin-aviso", "recordatorios-manuales", "recordatorio-inconsistente"],
+      "origin": ["mvp:F3", "us:US-03", "req:R-03", "evidence:recepcionista.md", "evidence:paciente.md", "evidence:doctora.md"]
+    },
+    {
+      "id": "E-03",
+      "title": "Control de agenda para la medico",
+      "value": "Medico consulta agenda completa desde celular sin llamar a recepcion. Puede bloquear franjas antes de que se reserven, evitando conflictos de ultimo momento.",
+      "priority": 3,
+      "rationale": "Lado de la oferta: sin estas historias la medico no controla su disponibilidad, lo que erosiona la confianza en el sistema. Depende de E-01.",
+      "personas": ["Dra. S. (medico)", "M. (recepcionista)"],
+      "pains_addressed": ["agenda-inaccesible-remotamente", "dobles-reservas"],
+      "origin": ["mvp:F4", "mvp:F5", "us:US-04", "us:US-05", "req:R-04", "req:R-07", "req:R-08", "evidence:doctora.md", "evidence:recepcionista.md"]
+    },
+    {
+      "id": "E-04",
+      "title": "Contexto clinico previo a la consulta (segunda fase)",
+      "value": "Medico conoce el motivo de consulta antes de que el paciente entre al consultorio, optimizando el tiempo de la cita.",
+      "priority": 4,
+      "rationale": "Fuera del MVP segun decision explicita del mvp-canvas.md. No ataca el cuello de botella de inasistencia. Sin evidencia de primera mano de que bloquee la metrica de exito.",
+      "personas": ["Dra. S. (medico)"],
+      "pains_addressed": ["falta-info-paciente-nuevo"],
+      "origin": ["mvp:fuera-de-alcance", "us:US-06", "req:R-05", "evidence:doctora.md"]
+    }
+  ],
+  "stories": [
+    {
+      "id": "US-01",
+      "epic": "E-01",
+      "as_a": "paciente",
+      "want": "reservar una cita en linea en cualquier momento del dia",
+      "so_that": "no tener que llamar durante mi horario de almuerzo ni acumular intentos fallidos",
+      "acceptance_criteria": [
+        "Dado que el paciente accede al sistema fuera del horario de atencion telefonica, cuando elige medico, fecha y hora disponibles y confirma, entonces la cita queda registrada y el paciente recibe confirmacion por WhatsApp.",
+        "Dado que el paciente intenta seleccionar una franja ya ocupada, cuando intenta confirmarla, entonces el sistema la muestra como no disponible y lo invita a elegir otra franja."
+      ],
+      "estimate": 8,
+      "dependencies": [],
+      "open_questions": [],
+      "priority": 1,
+      "origin": ["us:US-01", "req:R-01", "req:R-06", "req:R-09", "evidence:paciente.md", "evidence:recepcionista.md"]
+    },
+    {
+      "id": "US-02",
+      "epic": "E-01",
+      "as_a": "recepcionista",
+      "want": "que el sistema impida asignar la misma franja horaria a dos pacientes de forma simultanea",
+      "so_that": "dejen de ocurrir las dobles reservas (~2 por semana) que generan conflictos y dano a la reputacion de la clinica",
+      "acceptance_criteria": [
+        "Dado que dos solicitudes de reserva coinciden en la misma franja, cuando la primera se confirma, entonces la segunda recibe la franja como bloqueada antes de finalizar su proceso de reserva.",
+        "Dado que existe una cita activa en una franja, cuando se intenta agregar otra cita en el mismo horario, entonces el sistema rechaza la operacion con un mensaje de conflicto claro."
+      ],
+      "estimate": 5,
+      "dependencies": [],
+      "open_questions": [],
+      "priority": 2,
+      "origin": ["us:US-02", "req:R-02", "evidence:recepcionista.md"]
+    },
+    {
+      "id": "US-03",
+      "epic": "E-02",
+      "as_a": "paciente",
+      "want": "recibir un recordatorio automatico por WhatsApp 24 horas antes de mi cita con opcion de cancelar desde el mismo mensaje",
+      "so_that": "no olvide la cita ni genere una inasistencia sin aviso que desperdicie el tiempo de la medico y el turno de otro paciente",
+      "acceptance_criteria": [
+        "Dado que un paciente tiene una cita agendada, cuando faltan 24 horas para el turno, entonces el sistema envia automaticamente un mensaje de WhatsApp con fecha, hora y nombre de la medico, sin intervencion manual de la recepcionista.",
+        "Dado que el paciente recibe el recordatorio, cuando responde que desea cancelar, entonces la cita queda anulada y la franja vuelve a estar disponible en la agenda en tiempo real."
+      ],
+      "estimate": 8,
+      "dependencies": ["US-01"],
+      "open_questions": [],
+      "priority": 3,
+      "origin": ["us:US-03", "req:R-03", "evidence:recepcionista.md", "evidence:paciente.md", "evidence:doctora.md"]
+    },
+    {
+      "id": "US-04",
+      "epic": "E-03",
+      "as_a": "medico",
+      "want": "consultar mi agenda completa desde el celular con actualizacion en tiempo real",
+      "so_that": "no tenga que llamar a recepcion para saber cuantos pacientes tengo al dia siguiente ni cuando estoy fuera de la clinica",
+      "acceptance_criteria": [
+        "Dado que la medico accede desde un dispositivo movil, cuando abre su vista de agenda, entonces ve la lista de citas del dia con nombre del paciente, hora y estado (confirmada / cancelada).",
+        "Dado que se cancela o agrega una cita, cuando ocurre el cambio, entonces la agenda de la medico se actualiza sin necesidad de recargar manualmente la pagina."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-01"],
+      "open_questions": [],
+      "priority": 4,
+      "origin": ["us:US-04", "req:R-04", "req:R-08", "evidence:doctora.md"]
+    },
+    {
+      "id": "US-05",
+      "epic": "E-03",
+      "as_a": "medico",
+      "want": "bloquear franjas de mi agenda (congresos, vacaciones, imprevistos) para que esos horarios no esten disponibles para los pacientes",
+      "so_that": "los pacientes no puedan agendar en periodos en que no voy a estar disponible, evitando conflictos y reasignaciones de ultimo momento",
+      "acceptance_criteria": [
+        "Dado que la medico selecciona un rango de fechas u horas para bloquear, cuando confirma el bloqueo, entonces esas franjas desaparecen de la disponibilidad publica de inmediato y sin necesidad de accion adicional de la recepcionista.",
+        "Dado que hay un bloqueo activo en un periodo, cuando un paciente intenta agendar en ese periodo, entonces el sistema no le ofrece esa franja ni ninguna subfranja dentro de ella."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-01", "US-04"],
+      "open_questions": [],
+      "priority": 5,
+      "origin": ["us:US-05", "req:R-07", "evidence:doctora.md", "evidence:recepcionista.md"]
+    },
+    {
+      "id": "US-06",
+      "epic": "E-04",
+      "as_a": "medico",
+      "want": "que el paciente registre el motivo de la consulta al agendar, visible para mi antes de que llegue al consultorio",
+      "so_that": "pueda aprovechar al maximo el tiempo de consulta sin averiguar informacion basica al inicio de la cita",
+      "acceptance_criteria": [
+        "Dado que el paciente completa el formulario de agendamiento, cuando llega al paso de confirmacion, entonces puede escribir el motivo de la visita (campo opcional, maximo 200 caracteres).",
+        "Dado que la cita existe con motivo registrado, cuando la medico revisa su agenda, entonces puede ver el motivo junto al nombre del paciente antes de que llegue al consultorio."
+      ],
+      "estimate": 2,
+      "dependencies": ["US-01", "US-04"],
+      "open_questions": [],
+      "priority": 6,
+      "origin": ["us:US-06", "req:R-05", "evidence:doctora.md"]
+    }
+  ]
+}

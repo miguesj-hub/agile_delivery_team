@@ -1,0 +1,191 @@
+{
+  "epics": [
+    {
+      "id": "E-02",
+      "title": "Convertir tiempo trabajado en factura electrónica válida en un paso",
+      "value": "El freelancer genera una factura electrónica válida ante la DIAN, con IVA y retención en la fuente calculados automáticamente a partir del tiempo ya registrado, sin duplicar el trabajo en una hoja de cálculo aparte.",
+      "priority": 1,
+      "origin": [
+        "mvp:propuesta-de-valor",
+        "mvp:funcionalidades-minimas US-02 US-05",
+        "mvp:riesgo-regulatorio-tecnico",
+        "mvp:riesgo-calculo-tributario",
+        "requisito:R-02",
+        "requisito:R-03",
+        "requisito:R-16",
+        "pain:facturacion-electronica-doble-paso",
+        "pain:herramientas-no-localizadas-latam",
+        "pain:perdida-ingresos-desorganizacion"
+      ]
+    },
+    {
+      "id": "E-01",
+      "title": "Centralizar tiempo y tareas sin sincronización manual",
+      "value": "El freelancer deja de perder horas facturables por olvido de registrar tiempo y deja de gastar tiempo sincronizando tareas, tiempo y notas entre herramientas separadas. Mueve la métrica de éxito del MVP (horas admin semanales).",
+      "priority": 2,
+      "origin": [
+        "mvp:funcionalidades-minimas US-01 US-03 US-04",
+        "mvp:metrica-de-exito",
+        "requisito:R-01",
+        "requisito:R-05",
+        "requisito:R-06",
+        "pain:coordinacion-manual-herramientas",
+        "pain:time-tracking-inconsistente",
+        "pain:horas-admin-no-facturables",
+        "pain:cambio-contexto-tareas"
+      ]
+    },
+    {
+      "id": "E-03",
+      "title": "Visibilidad y seguimiento de cobro hasta que el dinero llega",
+      "value": "El freelancer sabe en todo momento cuánto ha facturado, cuánto le han pagado, cuánto está pendiente y cuánto está vencido, sin conciliar manualmente pagos por múltiples canales, y actúa a tiempo cuando una factura vence sin pago.",
+      "priority": 3,
+      "origin": [
+        "mvp:funcionalidades-minimas US-06 US-07 US-08",
+        "requisito:R-04",
+        "requisito:R-08",
+        "requisito:R-09",
+        "pain:seguimiento-manual-pagos",
+        "pain:pagos-multiples-canales-latam",
+        "pain:perdida-ingresos-desorganizacion",
+        "pain:carga-mental-constante"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "US-01",
+      "epic": "E-01",
+      "as_a": "freelancer independiente",
+      "want": "gestionar mis tareas, mi tiempo, mis facturas y mis notas de cliente en un solo lugar",
+      "so_that": "no tener que sincronizar manualmente varias herramientas",
+      "acceptance_criteria": [
+        "Dado un cliente con al menos una tarea activa, cuando registro tiempo contra esa tarea, entonces ese registro queda asociado al cliente y al proyecto sin necesidad de repetirlo en otra herramienta.",
+        "Dado que actualizo el estado de una tarea, cuando reviso el proyecto, entonces el estado se refleja sin pasos adicionales."
+      ],
+      "estimate": 5,
+      "dependencies": [],
+      "open_questions": [],
+      "priority": 2,
+      "origin": ["us:US-01", "requisito:R-01"]
+    },
+    {
+      "id": "US-02",
+      "epic": "E-02",
+      "as_a": "freelancer",
+      "want": "que el tiempo que registro contra un cliente se convierta directamente en las líneas de una factura",
+      "so_that": "no perder horas facturables por datos desincronizados entre herramientas",
+      "acceptance_criteria": [
+        "Dado tiempo registrado y no facturado para un cliente, cuando genero una factura para ese cliente, entonces todas las horas pendientes aparecen precargadas en la factura.",
+        "Dado que una hora ya fue incluida en una factura, cuando genero una factura nueva, entonces esa hora no se duplica."
+      ],
+      "estimate": 5,
+      "dependencies": ["US-01"],
+      "open_questions": [],
+      "priority": 1,
+      "origin": ["us:US-02", "requisito:R-02"]
+    },
+    {
+      "id": "US-03",
+      "epic": "E-01",
+      "as_a": "freelancer",
+      "want": "recibir un aviso cuando llevo un rato trabajando sin tener el registro de tiempo activo",
+      "so_that": "no perder horas facturables por olvido",
+      "acceptance_criteria": [
+        "Dado que no hay ningún registro de tiempo activo, cuando pasa un periodo prolongado de inactividad de registro, entonces recibo un aviso para iniciar o descartar el registro.",
+        "Dado un registro de tiempo activo, cuando pasan varias horas sin detenerlo, entonces recibo un aviso para confirmar si sigue en curso."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-01"],
+      "open_questions": [
+        "El inbox no especifica el umbral exacto de 'periodo prolongado' ni de 'varias horas' — no se define en requisitos.md ni user-stories.md."
+      ],
+      "priority": 2,
+      "origin": ["us:US-03", "requisito:R-05"]
+    },
+    {
+      "id": "US-04",
+      "epic": "E-01",
+      "as_a": "freelancer",
+      "want": "ver cuántas de mis horas semanales fueron facturables y cuántas administrativas",
+      "so_that": "entender dónde se va mi tiempo",
+      "acceptance_criteria": [
+        "Dado un rango de fechas, cuando consulto mi resumen semanal, entonces veo el total de horas divididas en facturables y administrativas."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-01"],
+      "open_questions": [],
+      "priority": 2,
+      "origin": ["us:US-04", "requisito:R-06"]
+    },
+    {
+      "id": "US-05",
+      "epic": "E-02",
+      "as_a": "freelancer",
+      "want": "generar la factura electrónica de un cliente, con IVA y retención en la fuente calculados automáticamente, sin preparar la información aparte en una hoja de cálculo",
+      "so_that": "no duplicar el trabajo de facturación",
+      "acceptance_criteria": [
+        "Dado un conjunto de horas o entregables pendientes de facturar a un cliente, cuando genero la factura, entonces el sistema calcula subtotal, IVA (19%) y retención en la fuente aplicable sin que yo tenga que calcularlos a mano.",
+        "Dado un cliente marcado como persona jurídica con retención aplicable, cuando genero su factura, entonces la retención se aplica automáticamente; dado un cliente sin retención, entonces no se aplica."
+      ],
+      "estimate": 8,
+      "dependencies": ["US-02"],
+      "open_questions": [
+        "El mecanismo real para emitir la factura como válida ante la DIAN (integrarse con un proveedor tecnológico habilitado, como Siigo/Alegra, o convertirse en uno) no está resuelto en el discovery — mvp-canvas.md lo marca como riesgo regulatorio/técnico alto.",
+        "Las reglas de cálculo de IVA/retención deben validarse con alguien con conocimiento contable/tributario antes de construir; el discovery no incluye esa validación (mvp-canvas.md → 'Riesgo de cálculo tributario')."
+      ],
+      "priority": 1,
+      "origin": ["us:US-05", "requisito:R-03", "requisito:R-16"]
+    },
+    {
+      "id": "US-06",
+      "epic": "E-03",
+      "as_a": "freelancer",
+      "want": "registrar los pagos que recibo por distintos canales (transferencia Bancolombia, Nequi, plataformas internacionales) asociados a la factura correspondiente",
+      "so_that": "no tener que conciliar manualmente cada canal",
+      "acceptance_criteria": [
+        "Dado un pago recibido en pesos colombianos, cuando lo registro contra una factura, entonces el saldo pendiente de esa factura se actualiza.",
+        "Dado un pago recibido en otra moneda, cuando lo registro, entonces puedo indicar el monto neto recibido en pesos para que se refleje correctamente en el saldo."
+      ],
+      "estimate": 5,
+      "dependencies": ["US-05"],
+      "open_questions": [
+        "El origen y momento exacto de la TRM a usar para pagos en otra moneda no se especifica en el inbox (requisitos.md → R-04 menciona 'conversión por TRM cuando aplique' sin detallar la fuente ni el momento de cálculo)."
+      ],
+      "priority": 3,
+      "origin": ["us:US-06", "requisito:R-04"]
+    },
+    {
+      "id": "US-07",
+      "epic": "E-03",
+      "as_a": "freelancer",
+      "want": "ver en un solo lugar cuánto he facturado, cuánto me han pagado, cuánto está pendiente y cuánto está vencido",
+      "so_that": "no tener que revisar varias hojas de cálculo para saberlo",
+      "acceptance_criteria": [
+        "Dado un conjunto de facturas emitidas, cuando entro al resumen de cobros, entonces veo el total facturado, cobrado, pendiente y vencido.",
+        "Dado que filtro por cliente, cuando reviso el resumen, entonces veo esos mismos totales solo para ese cliente."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-06"],
+      "open_questions": [],
+      "priority": 3,
+      "origin": ["us:US-07", "requisito:R-08"]
+    },
+    {
+      "id": "US-08",
+      "epic": "E-03",
+      "as_a": "freelancer",
+      "want": "que se me avise cuando una factura vence sin haber sido pagada",
+      "so_that": "hacer seguimiento a tiempo en vez de darme cuenta semanas después",
+      "acceptance_criteria": [
+        "Dado que una factura llega a su fecha de vencimiento sin pago registrado, cuando eso ocurre, entonces recibo un aviso identificando cliente y monto.",
+        "Dado que registro el pago de una factura vencida, cuando lo hago, entonces deja de aparecer como pendiente de seguimiento."
+      ],
+      "estimate": 3,
+      "dependencies": ["US-05"],
+      "open_questions": [],
+      "priority": 3,
+      "origin": ["us:US-08", "requisito:R-09"]
+    }
+  ]
+}

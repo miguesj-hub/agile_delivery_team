@@ -1,0 +1,54 @@
+{
+  "hypotheses": [
+    {
+      "id": "H-01",
+      "risk": "alto",
+      "assumption": "Los freelancers pagarán dinero real (no solo lo declararon en la entrevista) por una herramienta que resuelva el ciclo tiempo-factura-cobro.",
+      "hypothesis": "Creemos que freelancers solos que facturan en Colombia completarán una reserva pagada real si les mostramos una landing con la propuesta de valor y un precio concreto, porque el dolor financiero cuantificado (pérdidas de $1-2 millones COP por desorganización, según Daniela y Felipe) ya está validado en las entrevistas.",
+      "metric": "Tasa de conversión de visitantes calificados (freelancers colombianos) a una reserva pagada (depósito reembolsable) en el smoke test.",
+      "threshold": "Al menos 8% de conversión a reserva pagada sobre un mínimo de 150 visitas calificadas, en 3 semanas.",
+      "experiment": "Smoke test: landing page con la propuesta de valor y un botón de pago de reserva real (depósito reembolsable de $20.000-50.000 COP), promovida en comunidades de freelancers colombianos (grupos de Slack/Facebook/WhatsApp de diseñadores y desarrolladores). Caja de tiempo: 3 semanas, presupuesto máximo $300.000 COP en promoción dirigida.",
+      "decision": "Si la conversión es >=8% -> perseverar y avanzar a construir el MVP (US-01 a US-08). Si falla (conversión <8%) -> pivotar la propuesta de valor o el precio antes de construir nada; no se justifica invertir en el hub completo con esta evidencia."
+    },
+    {
+      "id": "H-02",
+      "risk": "alto",
+      "assumption": "Se puede integrar con un proveedor de facturación electrónica habilitado por la DIAN (o convertirse en uno) en un plazo y costo razonables para sostener el MVP.",
+      "hypothesis": "Creemos que podemos emitir una factura electrónica válida ante la DIAN vía la API de un proveedor habilitado (p. ej. Siigo o Alegra) en menos de 10 días-persona de esfuerzo, porque esos proveedores ya ofrecen APIs documentadas y los usan hoy Felipe y Marcela respectivamente.",
+      "metric": "Si el spike técnico logra emitir, en modo sandbox o certificación, una factura electrónica de prueba con IVA y retención en la fuente calculados correctamente.",
+      "threshold": "Al menos 1 factura electrónica de prueba emitida y validada (aceptada por el proveedor/sandbox DIAN) en <=10 días-persona, con el cálculo de IVA y retención verificado por una persona con conocimiento contable.",
+      "experiment": "Prototipo técnico desechable (spike): integrar la API de un proveedor de facturación electrónica en modo sandbox, sin construir el resto del hub. Caja de tiempo: 10 días-persona.",
+      "decision": "Si se logra la factura de prueba dentro del plazo -> perseverar, ese proveedor queda como base técnica de R-03/R-16. Si falla (no se logra en el plazo, o el costo por transacción resulta prohibitivo) -> evaluar un segundo proveedor o pivotar el alcance de R-03 (dejar la emisión final fuera del MVP inicial y ofrecer solo el cálculo de IVA/retención, con emisión manual por parte del usuario)."
+    },
+    {
+      "id": "H-03",
+      "risk": "alto",
+      "assumption": "Centralizar tiempo, factura y cobro efectivamente reduce las horas administrativas semanales del freelancer, no solo traslada el trabajo de un lugar a otro.",
+      "hypothesis": "Creemos que freelancers solos reducirán sus horas administrativas semanales autoreportadas en al menos 30% si reciben, de forma manual, el mismo servicio que el hub automatizaría (alguien centraliza su tiempo, genera sus facturas y hace seguimiento de cobro por ellos durante varias semanas), porque el dolor viene de la coordinación manual entre herramientas y no de falta de disciplina personal (evidencia fuerte en las 3 entrevistas).",
+      "metric": "Horas administrativas semanales autoreportadas por el freelancer (encuesta corta antes/después del experimento).",
+      "threshold": "Reducción promedio >=30% en horas administrativas semanales autoreportadas, con al menos 5 freelancers solos participando durante 3 semanas.",
+      "experiment": "Concierge / Mago de Oz: reclutar 5 freelancers solos del segmento (vía referidos de Daniela y Felipe o comunidades de freelancers), y que un operador humano centralice su tiempo y les genere facturas y seguimiento de cobro manualmente detrás de bambalinas cada semana. Caja de tiempo: 3 semanas, esfuerzo del operador <=10h/semana.",
+      "decision": "Si la reducción es >=30% -> perseverar, el valor central está validado y se justifica construir el software. Si falla (reducción <30%) -> investigar qué parte del ciclo (facturación, cobro o sincronización) no está aportando el ahorro esperado y ajustar el alcance del MVP antes de construir software."
+    },
+    {
+      "id": "H-04",
+      "risk": "medio",
+      "assumption": "Existe un modelo de precio que funciona para el segmento, a pesar de la evidencia conflictiva entre Daniela (exige pago único) y Marcela (acepta suscripción moderada).",
+      "hypothesis": "Creemos que ofrecer ambas opciones de precio (pago único con descuento por adelantado y suscripción mensual) en la misma landing no reducirá la conversión total frente a ofrecer solo una, porque el freelancer solo valora la flexibilidad de elegir tanto como la simplicidad, según las preferencias genuinamente distintas observadas en las entrevistas.",
+      "metric": "Tasa de conversión a reserva pagada, segmentada por la opción de precio elegida (pago único vs. mensual) dentro del mismo smoke test de H-01.",
+      "threshold": "Al menos una de las dos variantes de precio alcanza >=8% de conversión sobre un mínimo de 75 visitas calificadas por variante, en las mismas 3 semanas del experimento de H-01.",
+      "experiment": "A/B dentro del smoke test de H-01: la mitad de las visitas calificadas ve la oferta de pago único, la otra mitad ve la oferta de suscripción mensual; se mide conversión por variante.",
+      "decision": "Si ambas variantes superan el umbral -> ofrecer las dos opciones en el lanzamiento. Si solo una lo supera -> quedarse con esa. Si falla (ninguna variante supera el umbral) -> el problema no es el modelo de precio sino la propuesta de valor; revisar primero el resultado de H-01 antes de seguir iterando sobre precio."
+    },
+    {
+      "id": "H-05",
+      "risk": "medio",
+      "assumption": "Los freelancers están dispuestos a migrar su historial y hábito de trabajo desde su stack actual (Toggl, Sheets, Trello, Notion) hacia una herramienta nueva.",
+      "hypothesis": "Creemos que la mayoría de los freelancers que muestran intención real de pago (participantes de H-01/H-03) completarán la migración de al menos un cliente activo (tareas, tiempo y facturas pendientes) dentro de la primera semana, porque el costo de mantener el stack actual ya supera el costo percibido de cambiar, según lo declarado en las 3 entrevistas.",
+      "metric": "Porcentaje de participantes del experimento concierge (H-03) que traen y migran la información de al menos un cliente activo real dentro de los primeros 7 días.",
+      "threshold": ">=50% de los participantes del concierge migran al menos 1 cliente activo real en <=7 días desde que se unen al experimento.",
+      "experiment": "Extensión del concierge de H-03: al incorporarse, se pide a cada freelancer traer la información de un cliente activo real (no ficticia) para que el operador la centralice; se mide si la trae y en qué plazo. Caja de tiempo: las mismas 3 semanas del experimento de H-03, sin costo adicional.",
+      "decision": "Si >=50% migra en el plazo -> perseverar, el costo de cambio no es una barrera mayor para el segmento. Si falla (<50% migra) -> hacer entrevistas cortas a quienes no migraron para entender la fricción específica, antes de invertir en importadores automáticos u otras soluciones de migración."
+    }
+  ]
+}

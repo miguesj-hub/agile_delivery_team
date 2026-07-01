@@ -1,0 +1,90 @@
+{
+  "personas": [
+    {
+      "name": "Daniela (freelancer solo, diseñadora UX/UI)",
+      "role": "diseñadora ux/ui freelance",
+      "primary": true
+    },
+    {
+      "name": "Felipe (freelancer solo, desarrollador web, foco en facturación)",
+      "role": "desarrollador web freelance",
+      "primary": true
+    },
+    {
+      "name": "Marcela (freelancer con equipo, directora de micro-agencia creativa)",
+      "role": "directora de agencia creativa pequeña (freelancer con equipo)",
+      "primary": true
+    }
+  ],
+  "pains": [
+    { "id": "coordinacion-manual-herramientas", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "coordinacion-manual-herramientas", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "coordinacion-manual-herramientas", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "horas-admin-no-facturables", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "horas-admin-no-facturables", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "horas-admin-no-facturables", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "cambio-contexto-tareas", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "cambio-contexto-tareas", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "cambio-contexto-tareas", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "facturacion-electronica-doble-paso", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "facturacion-electronica-doble-paso", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "facturacion-electronica-doble-paso", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "seguimiento-manual-pagos", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "seguimiento-manual-pagos", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "seguimiento-manual-pagos", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "time-tracking-inconsistente", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "time-tracking-inconsistente", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "time-tracking-inconsistente", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "pagos-multiples-canales-latam", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "pagos-multiples-canales-latam", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "pagos-multiples-canales-latam", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "herramientas-no-localizadas-latam", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "herramientas-no-localizadas-latam", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "herramientas-no-localizadas-latam", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "propuestas-tiempo-perdido", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "propuestas-tiempo-perdido", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "propuestas-tiempo-perdido", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "scope-creep", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "scope-creep", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "scope-creep", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "rentabilidad-cliente-invisible", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+    { "id": "rentabilidad-cliente-invisible", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "rentabilidad-cliente-invisible", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+
+    { "id": "perdida-ingresos-desorganizacion", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "perdida-ingresos-desorganizacion", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "perdida-ingresos-desorganizacion", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "carga-mental-constante", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "carga-mental-constante", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "anticipos-contratos-proteccion", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "anticipos-contratos-proteccion", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+
+    { "id": "aislamiento-profesional", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "aislamiento-profesional", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+
+    { "id": "consolidacion-contabilidad", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "desconfianza-proveedor-unico", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+    { "id": "automatizacion-fragil", "source": "daniela-freelancer-solo.md", "persona": "Daniela (freelancer solo, diseñadora UX/UI)" },
+
+    { "id": "disputa-plataforma-freelance", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "facturacion-electronica-costosa-sobredimensionada", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+    { "id": "clientes-no-pagan-desaparecen", "source": "felipe-freelancer-facturador.md", "persona": "Felipe (freelancer solo, desarrollador web, foco en facturación)" },
+
+    { "id": "coordinacion-equipo-manual", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+    { "id": "pago-contratistas-basado-en-estimacion", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+    { "id": "comunicacion-clientes-dispersa", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" },
+    { "id": "limite-escalar-sin-infraestructura", "source": "marcela-freelancer-equipo.md", "persona": "Marcela (freelancer con equipo, directora de micro-agencia creativa)" }
+  ]
+}

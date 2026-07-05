@@ -1,126 +1,111 @@
-# Épicas — freelancer-tools
+# Épicas del MVP — freelancer-tools
 
-> Fuente única: `inbox/mvp-canvas.md`, `inbox/user-stories.md`, `inbox/requisitos.md`,
-> `inbox/personas.md`, `inbox/evidence-map.json`. Toda épica traza a ítems de esas
-> fuentes (ver `Origen` en cada una y en `backlog.json`).
+Descomposición del MVP en 3 épicas orientadas a outcome (comportamiento que cambia), ordenadas por valor y riesgo. Cada épica responde: "¿qué problema administrativo resuelve para qué persona?"
 
-El MVP (mvp-canvas.md) define una sola cadena de valor: **Output** (hub de
-tiempo + factura + cobro, con IVA/retención automáticos, US-01 a US-08) →
-**Outcome** (el freelancer deja de perder horas admin en sincronizar y
-cobrar) → **Impact** (baja el % de horas semanales no facturables). Las tres
-épicas de abajo descomponen ese output en tres resultados de comportamiento
-distintos para el mismo segmento (freelancer solo que factura en Colombia:
-Daniela, Felipe — Marcela y R-14/R-15 quedan fuera de alcance, ver
-mvp-canvas.md → "Fuera de alcance").
+---
 
-## E-01 · Centralizar tiempo y tareas sin sincronización manual
-**Valor (outcome):** El freelancer deja de perder horas facturables por
-olvido de registrar tiempo y deja de gastar tiempo sincronizando tareas,
-tiempo y notas entre herramientas separadas (Trello, Toggl, Sheets, Notion).
-Mueve directamente la métrica de éxito del MVP: horas semanales de
-administración auto-reportadas (línea base ~15-20h/45h → meta ≤13h).
-**Origen:** mvp-canvas.md (funcionalidades mínimas US-01, US-03, US-04;
-métrica de éxito); requisitos.md R-01, R-05, R-06; personas.md /
-evidence-map.json — dolores `coordinacion-manual-herramientas`,
-`time-tracking-inconsistente`, `horas-admin-no-facturables`,
-`cambio-contexto-tareas` (corroborados por Daniela, Felipe y Marcela, aunque
-el MVP solo se construye para freelancer solo).
-**Prioridad:** 2
+## E-01 · Registrar tiempo sin perder horas facturables por olvido
+
+**Valor (outcome):** El freelancer registra tiempo de forma consistente y visualiza dónde se va su tiempo (facturable vs administrativo), eliminando la pérdida de ingresos por olvido de timer y ganando claridad sobre el origen de horas administrativas.
+
+**Origen:**
+- `mvp-canvas.md`: Funcionalidades mínimas US-01, US-03, US-04
+- `user-stories.md`: US-01, US-03, US-04
+- `requisitos.md`: R-01 (centralizar), R-05 (recordatorio), R-06 (reportería de horas)
+- `personas.md`: dolores `time-tracking-inconsistente`, `horas-admin-no-facturables`, `cambio-contexto-tareas`
+
+**Prioridad:** 2 (ALTA) — Es el fundamento del sistema. Sin un registro de tiempo confiable, la factura será incorrecta. Aunque técnicamente menos arriesgado que E-02, es bloqueante funcional. Validar que los usuarios pueden registrar tiempo sin fricción es crítico para la adopción.
+
 **Historias:** US-01, US-03, US-04
 
-## E-02 · Convertir tiempo trabajado en factura electrónica válida en un paso
-**Valor (outcome):** El freelancer genera una factura electrónica válida
-ante la DIAN, con IVA y retención en la fuente calculados automáticamente a
-partir del tiempo ya registrado, sin duplicar el trabajo en una hoja de
-cálculo aparte y sin perder horas facturables por datos desincronizados.
-Es la propuesta de valor central del MVP ("dejar de ser la integradora
-humana… el tiempo se convierte directamente en una factura electrónica
-válida ante la DIAN").
-**Origen:** mvp-canvas.md (propuesta de valor; funcionalidades mínimas
-US-02, US-05; riesgo regulatorio/técnico y riesgo de cálculo tributario);
-requisitos.md R-02, R-03, R-16; personas.md / evidence-map.json — dolores
-`facturacion-electronica-doble-paso`, `herramientas-no-localizadas-latam`,
-`perdida-ingresos-desorganizacion` (incluye el caso de Felipe, que "regaló"
-un entregable de 2 millones COP por olvidar facturarlo).
-**Prioridad:** 1
+---
+
+## E-02 · Generar facturas electrónicas válidas en un solo paso (sin sincronización manual)
+
+**Valor (outcome):** El freelancer convierte horas trabajadas en facturas electrónicas válidas ante la DIAN (con IVA y retención automáticos) en un solo paso, eliminando el trabajo administrativo doble (Sheets → Siigo/Alegra) y el riesgo de cálculo tributario incorrecto.
+
+**Origen:**
+- `mvp-canvas.md`: Funcionalidades mínimas US-02, US-05; Riesgo regulatorio/técnico alto (DIAN)
+- `user-stories.md`: US-02, US-05
+- `requisitos.md`: R-02 (tiempo → factura automático), R-03 (factura electrónica DIAN), R-16 (cumplimiento tributario colombiano)
+- `personas.md`: dolores `coordinacion-manual-herramientas`, `facturacion-electronica-doble-paso`, `herramientas-no-localizadas-latam`, `perdida-ingresos-desorganizacion`
+
+**Prioridad:** 1 (CRÍTICA) — Es el corazón del MVP y la propuesta de valor más dramática. El mayor cambio de comportamiento para el usuario (Felipe: Sheets→Siigo; Daniela: Sheets→manual). Es también el riesgo técnico/regulatorio más alto (validación DIAN, cálculo tributario, integración con proveedor habilitado). Este riesgo debe validarse lo antes posible. Sin E-02 funcionando, no hay MVP.
+
 **Historias:** US-02, US-05
 
-## E-03 · Visibilidad y seguimiento de cobro hasta que el dinero llega
-**Valor (outcome):** El freelancer sabe en todo momento cuánto ha
-facturado, cuánto le han pagado, cuánto está pendiente y cuánto está
-vencido — sin conciliar manualmente pagos por Bancolombia, Nequi o canales
-internacionales ni revisar varias hojas de cálculo — y actúa a tiempo
-cuando una factura vence sin pago.
-**Origen:** mvp-canvas.md (funcionalidades mínimas US-06, US-07, US-08);
-requisitos.md R-04, R-08, R-09; personas.md / evidence-map.json — dolores
-`seguimiento-manual-pagos`, `pagos-multiples-canales-latam`,
-`perdida-ingresos-desorganizacion`, `carga-mental-constante` (atendido
-parcialmente, según user-stories.md → "Validación cruzada").
-**Prioridad:** 3
+---
+
+## E-03 · Registrar pagos y tener visibilidad de cobros en un solo lugar
+
+**Valor (outcome):** El freelancer sabe en tiempo real cuánto ha cobrado, cuánto está pendiente y cuánto está vencido (en un solo dashboard), y recibe alertas automáticas de facturas vencidas, eliminando la carga mental de seguimiento manual y el riesgo de deudas olvidadas.
+
+**Origen:**
+- `mvp-canvas.md`: Funcionalidades mínimas US-06, US-07, US-08
+- `user-stories.md`: US-06, US-07, US-08
+- `requisitos.md`: R-04 (registro de pagos multicanal), R-08 (dashboard de cobros), R-09 (alerta vencida)
+- `personas.md`: dolores `seguimiento-manual-pagos`, `pagos-multiples-canales-latam`, `carga-mental-constante`, `clientes-no-pagan-desaparecen` (Felipe)
+
+**Prioridad:** 3 (MEDIA-ALTA) — Cierra el ciclo tiempo→factura→cobro. Menos arriesgado que E-02 técnicamente, pero crítico para que el freelancer confíe en el sistema y para resolver el pain point de carga mental. Sin E-03, el usuario debe seguir usando Sheets para saber qué le deben.
+
 **Historias:** US-06, US-07, US-08
 
-## Justificación de prioridad (valor, no facilidad técnica)
+---
 
-1. **E-02** primero: es la propuesta de valor central del MVP y el mayor
-   riesgo del proyecto a la vez (riesgo regulatorio/técnico de integración
-   con la DIAN y riesgo de cálculo tributario, ambos señalados como
-   condicionantes de cronograma y costo en `mvp-canvas.md`). Validar esto
-   temprano reduce la mayor incertidumbre del delivery y ataca
-   directamente la pérdida de ingresos real más grave documentada
-   (Felipe perdió 2M COP por olvidar facturar).
-2. **E-02** también depende de que exista un registro de tiempo, pero el
-   riesgo/valor de la factura domina sobre la comodidad del hub — por eso
-   **E-01** entra en segundo lugar: es la base operativa diaria
-   (recordatorios de timer, distinción de horas facturables) que mueve
-   directamente la métrica de éxito del MVP (horas admin semanales), y sin
-   ella E-02 no tiene datos de tiempo consistentes que facturar.
-3. **E-03** cierra el ciclo (cobro) y depende de que ya existan facturas
-   generadas por E-02; su dolor (seguimiento manual de pagos) es real y
-   compartido, pero solo se activa una vez que el freelancer ya está
-   facturando por el sistema, por lo que se prioriza al final del núcleo.
-
-## Diagrama del backlog
+## Diagrama del backlog de épicas y historias
 
 ```mermaid
-flowchart TD
-  classDef epic fill:#0F766E,color:#fff,stroke:#0B5B54;
-  classDef ready fill:#0F766E,color:#fff,stroke:#0B5B54;
-  classDef refine fill:#6D28D9,color:#fff,stroke:#4C1D95;
+graph LR
+    classDef epic fill:#0D9488,color:#fff,stroke:#115E59,stroke-width:2px;
+    classDef storyReady fill:#86EFAC,color:#022C22,stroke:#15803D;
+    classDef storyRefining fill:#C084FC,color:#3F0F5C,stroke:#7E22CE;
 
-  E02["E-02 · Factura electrónica en un paso\n(prioridad 1)"]:::epic
-  E01["E-01 · Centralizar tiempo y tareas\n(prioridad 2)"]:::epic
-  E03["E-03 · Visibilidad y seguimiento de cobro\n(prioridad 3)"]:::epic
+    E1["E-01<br/>Registrar tiempo<br/>sin perder horas"]:::epic
+    E2["E-02<br/>Generar facturas<br/>electrónicas DIAN<br/>(CRÍTICA)"]:::epic
+    E3["E-03<br/>Registrar pagos<br/>y visibilidad"]:::epic
 
-  E02 --> US02["US-02 tiempo → factura automático"]:::refine
-  E02 --> US05["US-05 factura con IVA/retención en un paso"]:::refine
+    E1 --> US1["US-01<br/>Hub único<br/>tarea/tiempo/nota"]:::storyRefining
+    E1 --> US3["US-03<br/>Recordatorio<br/>timer inactivo"]:::storyRefining
+    E1 --> US4["US-04<br/>Horas facturables<br/>vs admin"]:::storyRefining
 
-  E01 --> US01["US-01 hub único tarea/tiempo/factura/nota"]:::refine
-  E01 --> US03["US-03 recordatorio de timer"]:::refine
-  E01 --> US04["US-04 horas facturables vs. admin"]:::refine
+    E2 --> US2["US-02<br/>Precarga automática<br/>tiempo en factura"]:::storyRefining
+    E2 --> US5["US-05<br/>Factura electrónica<br/>IVA/retención DIAN"]:::storyRefining
 
-  E03 --> US06["US-06 conciliación de pagos multicanal"]:::refine
-  E03 --> US07["US-07 dashboard de cobros"]:::refine
-  E03 --> US08["US-08 alerta de factura vencida"]:::refine
+    E3 --> US6["US-06<br/>Registro de pagos<br/>multicanal"]:::storyRefining
+    E3 --> US7["US-07<br/>Dashboard<br/>de cobros"]:::storyRefining
+    E3 --> US8["US-08<br/>Alerta factura<br/>vencida"]:::storyRefining
+
+    style E1 stroke:#115E59,stroke-width:2px
+    style E2 stroke:#DC2626,stroke-width:3px
+    style E3 stroke:#115E59,stroke-width:2px
 ```
 
-> Color: teal (`#0F766E`) = épica / historia en backlog priorizado; morado
-> (`#6D28D9`) = historia candidata pendiente de refinamiento INVEST por el
-> Developer (todas lo están en esta fase — ninguna ha pasado aún por
-> `generate-stories`).
+**Leyenda:**
+- **Teal oscuro (E-01, E-03):** Épicas de prioridad media-alta (foundational, supportive).
+- **Rojo (E-02):** Épica crítica (corazón del MVP, máximo riesgo técnico/regulatorio).
+- **Verde:** Historias candidatas (pueden tener open_questions que refinará el Developer).
+- **Morado:** Historias que necesitan refinamiento adicional.
 
-## Supuestos y preguntas abiertas relevantes para priorización
+---
 
-Estos no se afirman como hechos; quedan como preguntas abiertas para el
-equipo (ver también `backlog.json` → `open_questions` por historia):
+## Justificación de priorización
 
-- El riesgo regulatorio de E-02 (integrarse con un proveedor tecnológico
-  habilitado por la DIAN, o convertirse en uno) puede cambiar el esfuerzo
-  real de US-05 de forma significativa; no está resuelto en el discovery
-  (mvp-canvas.md → "Riesgos y supuestos").
-- Las reglas de IVA/retención de US-05 deben validarse con alguien con
-  conocimiento contable/tributario antes de construir; el discovery no
-  incluye esa validación (mvp-canvas.md → "Riesgo de cálculo tributario").
-- El modelo de precio (R-19) tiene evidencia en conflicto (pago único vs.
-  suscripción) y no se resuelve en este backlog — no bloquea el orden de
-  las épicas, pero sí una decisión de negocio pendiente (requisitos.md →
-  "Evidencia conflictiva").
+La cadena de valor del MVP es **Tiempo → Factura → Cobro**. Sin embargo, la priorización no sigue el flujo de producto, sino el **riesgo y el valor**:
+
+1. **E-02 es CRÍTICA (Prioridad 1)** porque:
+   - Es la propuesta de valor más disruptiva (cambio máximo de flujo de trabajo).
+   - Concentra el riesgo más alto del MVP: cumplimiento DIAN, integración con proveedor habilitado, cálculo tributario sin errores.
+   - Sin E-02, no hay MVP. Es el primer gate que debe pasar.
+   - Las otras épicas son supportive: no importa cuán bueno sea el timer (E-01) o la visibilidad de cobros (E-03) si la factura no es válida ante la DIAN.
+
+2. **E-01 es ALTA (Prioridad 2)** porque:
+   - Es el input del sistema. Tiempo incorrecto = factura incorrecta.
+   - Menos arriesgado que E-02, pero bloqueante funcional.
+   - Valida la aceptación del flujo básico (gestionar tarea, registrar tiempo) antes de meterse en la complejidad tributaria.
+
+3. **E-03 es MEDIA-ALTA (Prioridad 3)** porque:
+   - Cierra el ciclo y da confianza al usuario.
+   - Menos arriesgado que E-02 o E-01.
+   - Sin E-03, el usuario debe seguir usando Sheets; con E-03, tiene un único lugar de verdad.
+   - US-08 (alerta vencida) es particularmente valiosa para Felipe (que perdió cobros).
+

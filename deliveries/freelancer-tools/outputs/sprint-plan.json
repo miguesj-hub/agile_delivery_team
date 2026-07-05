@@ -1,0 +1,42 @@
+{
+  "sprint": 1,
+  "sprint_goal": "Validar que el freelancer puede registrar y clasificar tiempo de forma consistente en un solo lugar, visualizando exactamente dónde se va su tiempo (facturable vs administrativo), eliminando pérdida de ingresos por olvido de timer.",
+  "capacity": 20,
+  "committed_points": 15,
+  "commitment_ratio": 0.75,
+  "safety_margin_points": 5,
+  "stories": ["US-01", "US-03", "US-04"],
+  "blocked_stories": [
+    {
+      "id": "US-02",
+      "epic": "E-02",
+      "reason": "Open question bloqueante: ¿tarifa actual o histórica en precarga de factura?"
+    },
+    {
+      "id": "US-05",
+      "epic": "E-02",
+      "reason": "Bloqueada por US-02 (dependencia transitiva)"
+    },
+    {
+      "id": "US-06",
+      "epic": "E-03",
+      "reason": "Bloqueada por US-02 (dependencia transitiva)"
+    },
+    {
+      "id": "US-07",
+      "epic": "E-03",
+      "reason": "Bloqueada por US-02 (dependencia transitiva)"
+    },
+    {
+      "id": "US-08",
+      "epic": "E-03",
+      "reason": "Bloqueada por US-02 (dependencia transitiva)"
+    }
+  ],
+  "validation": {
+    "all_stories_ready": true,
+    "committed_within_capacity": true,
+    "dependencies_clear": true,
+    "validation_timestamp": "2026-07-05T12:30:00Z"
+  }
+}
